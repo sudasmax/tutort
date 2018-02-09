@@ -1,0 +1,15 @@
+﻿@model Tutort.Web.ViewModels.Page.HeadLineViewModel
+@using Tutort.Web.Extensions;
+
+<div id="heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading-content">
+                    <h2>@Model.Title</h2>
+                    <span>@Model.ToNavigationMenu(" / ")</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

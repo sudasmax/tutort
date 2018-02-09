@@ -1,0 +1,31 @@
+﻿@model Tutort.Web.ViewModels.Giveaway.GiveawayListViewModel
+
+@{
+    ViewBag.Title = Tutort.Web.Localization.Giveaway.GiveawayList_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeadLine {
+    @Html.Partial("~/Views/Page/HeadLine.cshtml", Model.HeadLine)
+}
+
+
+<div id="products-post">
+    <div class="container">
+        <div class="row" id="Container">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-md-3 col-sm-6 mix portfolio-item hamburger">
+                    <div class="portfolio-wrapper">
+                        <div class="portfolio-thumb">
+                            <a href="@item.Link"><img src="@item.Image" alt="" /></a>
+                        </div>
+                        <div class="label-text">
+                            <h3><a href="@item.Link">@item.Title</a></h3>
+                            <span class="text-category">@item.Date</span>
+                        </div>
+                    </div>
+                </div>}
+        </div>
+    </div>
+</div>

@@ -1,0 +1,110 @@
+﻿@model Tutort.Web.ViewModels.Page.FooterViewModel
+
+<footer>
+	<div class="container">
+		@*<div class="top-footer">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="subscribe-form">
+						<span>@Tutort.Web.Localization.Footer.Subscribe</span>
+						<form method="get" class="subscribeForm">
+							<input id="subscribe" type="text" />
+							<input type="submit" id="submitButton" />
+						</form>
+					</div>
+				</div>
+				<div class="col-md-12">
+					<div class="social-bottom">
+						<span>@Tutort.Web.Localization.Footer.FollowUsTitle:</span>
+						<ul>
+							<li><a href="@Tutort.Web.Localization.General.Media_Instagram" target="_blank" class="fa fa-instagram"></a></li>
+							<li><a href="@Tutort.Web.Localization.General.Media_VK" target="_blank" class="fa fa-vk"></a></li>
+							<li><a href="@Tutort.Web.Localization.General.Media_Facebook" target="_blank" class="fa fa-facebook"></a></li>
+								<li><a href="@tutort.resources.general.media_odnoklassniki" target="_blank" class="fa fa-odnoklassniki"></a></li>
+							<li><a href="@Tutort.Web.Localization.General.Media_Twitter" target="_blank" class="fa fa-twitter"></a></li>
+							<li><a href="@Tutort.Web.Localization.General.Media_Tumblr" target="_blank" class="fa fa-tumblr"></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>*@
+		@*<div class="main-footer">
+			<div class="row">
+				<div class="col-md-3">
+					<div class="about">
+						<h4 class="footer-title">@Tutort.Web.Localization.Footer.AboutUsTitle</h4>
+						<p>
+							Grill is free HTML5 template by <span class="blue">template</span><span class="green">mo</span> and it is a free responsive bootstrap layout that can be applied for any purpose.
+							<br><br>Credit goes to <a rel="nofollow" href="http://unsplash.com">Unsplash</a> for photos used in this template. Nam commodo erat quis ligula placerat viverra.
+						</p>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="shop-list">
+							<h4 class="footer-title">@Tutort.Web.Localization.Footer.CategoriesTitle</h4>
+							<ul>
+								<li><a href="#"><i class="fa fa-angle-right"></i>New Grill Menu</a></li>
+								<li><a href="#"><i class="fa fa-angle-right"></i>Healthy Fresh Juices</a></li>
+								<li><a href="#"><i class="fa fa-angle-right"></i>Spicy Delicious Meals</a></li>
+								<li><a href="#"><i class="fa fa-angle-right"></i>Simple Italian Pizzas</a></li>
+								<li><a href="#"><i class="fa fa-angle-right"></i>Pure Good Yogurts</a></li>
+								<li><a href="#"><i class="fa fa-angle-right"></i>Ice-cream for kids</a></li>
+							</ul>
+						</div>
+				</div>
+				<div class="col-md-3">
+					<div class="recent-posts">
+						<h4 class="footer-title">@Tutort.Web.Localization.Footer.ResentInstagramTitle</h4>
+						@if (Model.LatestPosts != null)
+						{
+							foreach (var post in Model.LatestPosts)
+							{
+							<div class="recent-post">
+								<div class="recent-post-thumb">
+									@if (post.Image != null && post.Image.Url != null)
+									{
+									<img src="@post.Image.Url" width="70" height="70" alt="">
+									}
+								</div>
+								<div class="recent-post-info">
+									<p><a href="@post.Url" target="_blank">@post.Description</a></p>
+									<span>@post.Date.ToShortDateString()</span>
+								</div>
+							</div>
+							}
+						}
+						<div class="recent-post">
+							<div class="recent-post-thumb">
+								<img src="~/images/recent-post2.jpg" alt="">
+							</div>
+							<div class="recent-post-info">
+								<h6><a href="#">Simple and effective meals</a></h6>
+								<span>18/12/2084</span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3">
+					<div class="more-info">
+						<h4 class="footer-title">@Tutort.Web.Localization.Footer.ContactsTitle</h4>
+						<p>Sed dignissim, diam id molestie faucibus, purus nisl pretium quam, in pulvinar velit massa id elit.</p>
+						<ul>
+							<li><i class="fa fa-phone"></i><a href="tel:@Tutort.Web.Localization.General.ContactPhoneStrict">@Tutort.Web.Localization.Footer.ContactPhone</a></li>
+							<li><i class="fa fa-globe"></i>@Tutort.Resources.General.ContactAddress</li>
+							<li><i class="fa fa-envelope"></i><a href="mailto:@Tutort.Web.Localization.General.ContactEmail">@Tutort.Web.Localization.General.ContactEmail</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>*@
+		<div class="bottom-footer">
+			<p>
+				<span>
+					Copyright © @DateTime.Now.Year @Html.ActionLink(Tutort.Web.Localization.General.DomainNameShort, "Index", "Home")
+					| @Tutort.Web.Localization.Footer.CopyrightMessage
+				</span>
+			</p>
+		</div>
+
+	</div>
+</footer>

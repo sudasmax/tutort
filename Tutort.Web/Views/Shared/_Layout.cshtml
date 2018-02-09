@@ -1,0 +1,49 @@
+﻿@*@model Tutort.Web.ViewModels.Shared.PageViewModel*@
+
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <title>@Tutort.Web.Localization.General.Name | @ViewBag.Title</title>
+    <meta name="description" content="">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    @Styles.Render("~/bundles/content")
+
+    <!-- Add local styles, mostly for plugins css file -->
+    @if (IsSectionDefined("Styles"))
+    {
+        @RenderSection("Styles", required: false)
+    }
+
+</head>
+<body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
+    <![endif]-->
+    @*@RenderPage("~/Views/Shared/Header.cshtml", Model.Header)*@
+    @Html.Action("Header", "Page")
+    @RenderSection("HeadLine", false)
+    @RenderSection("Slider", false)
+
+    @RenderBody()
+
+    @Html.Action("Footer", "Page")
+
+    @Scripts.Render("~/bundles/modernizr/js")
+    @Scripts.Render("~/bundles/jquery/js")
+    @Scripts.Render("~/bundles/main/js")
+    @Scripts.Render("~/bundles/bootstrap/js")
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

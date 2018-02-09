@@ -1,0 +1,186 @@
+﻿@model Tutort.Web.ViewModels.Giveaway.GiveawayViewModel
+
+@{
+    ViewBag.Title = Tutort.Web.Localization.Giveaway.Giveaway_Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section HeadLine {
+    @Html.Partial("~/Views/Page/HeadLine.cshtml", Model.HeadLine)
+}
+
+
+@if (!Model.IsActive)
+{
+    <div id="timeline-post">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-section">
+                        <h2>Розыгрыш завершен</h2>
+                        <img src="@Url.Content("~/images/under-heading.png")" alt="">
+                        @if (Model.Winner != null)
+                        {
+                            <h2><a href="https://www.instagram.com/@Model.Winner.InstagramUser/" target="_blank">@Model.Winner.InstagramUser</a></h2>
+                            <img src="images/under-heading.png" alt="">
+                            <p>
+                                Комментарий:<br />
+                                @Model.Winner.Comments[0].Comment
+                            </p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading-section">
+                    <h2>Условия розыгрыша</h2>
+                    <img src="@Url.Content("~/images/under-heading.png")" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var rule in Model.Rules)
+            {
+                <div class="col-md-4 col-sm-6">
+                    <div class="service-item">
+                        <div class="icon">
+                            <i class="@rule.Class"></i>
+                        </div>
+                        <h4>@rule.Title</h4>
+                        <p>@rule.Text</p>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="space50"></div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Правила розыгрыша</h3>
+                <p>
+                    @Model.Info
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h3>Результаты розыгрыша</h3>
+                <p>
+                    @Model.Details
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="our-team">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="heading-section">
+                    <h2>Текущие результаты</h2>
+                    <img src="@Url.Content("~/images/under-heading.png")" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Пользователь </th>
+                            <th>Количество комментариев</th>
+                            <th>Комментарии</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{int i = 1;}
+                        @foreach (var item in Model.Participants)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td><a href="https://www.instagram.com/@item.InstagramUser/" target="_blank">@item.InstagramUser</a></td>
+                                <td>@item.Comments.Length</td>
+                                <td>
+                                    @foreach (var comment in item.Comments)
+                                    {
+                                        @comment.Comment
+                                        <br/>
+                                    }
+                                    @*@string.Join(", ", item.Comments.Select(x => string.Format("\"{0}\"", x)))*@
+                                </td>
+                            </tr>
+
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (Model.IsActive && Model.Winner == null)
+{
+    <div id="testimonails">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading-section">
+                        <h2><a href="javascript:;" id="bannerformmodal_promo">Выбрать победителя</a></h2>
+                        <img src="@Url.Content("~/images/under-heading.png")" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="dialog" style="display: none" />
+
+    @section Styles {
+        @Styles.Render("~/Vendor/jquery-ui/css")
+    }
+
+    @section Scripts {
+
+        @Scripts.Render("~/Vendor/jquery-ui/js")
+
+        <script type="text/javascript">
+            $(function () {
+                $("#dialog").dialog({
+                    autoOpen: false,
+                    modal: true,
+                    title: "Победитель",
+                    width: 600,
+                    position: { my: "center", at: "center", of: window }
+                });
+                $("#bannerformmodal_promo").click(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "/giveaway/@Model.Date/select",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "html",
+                        success: function (response) {
+                            $('#dialog').html(response);
+                            $('#dialog').dialog('open');
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        },
+                        error: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                });
+            });
+        </script>
+    }
+}

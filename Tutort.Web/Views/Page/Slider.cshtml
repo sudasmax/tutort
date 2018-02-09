@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Tutort.Web.ViewModels.Page.Slide>
+
+<div id="slider">
+    <div class="flexslider">
+        <ul class="slides">
+            @foreach (var slide in Model)
+            {
+                <li>
+                    @*<div class="slider-caption">
+                        <h1>Title</h1>
+                        <p>
+                            Text
+                        </p>
+
+                        <a href="">Узнать больше</a>
+                    </div>*@
+                    <img src="@slide.ImageUrl" alt="" />
+                </li>
+            }
+        </ul>
+    </div>
+</div>
